@@ -2,7 +2,7 @@ local Scrollable = require('scrollable')
 
 local function scanBluetooth()
   local lines = {
-    'RSSI Address      Short Name',
+    'RSSI Address      Name',
     '-------------------------------------------------------------------------------------',
   }
   local mapping = {}
@@ -25,9 +25,10 @@ local function scanBluetooth()
 
     local length = data:byte(10)
     local dataType = data:byte(11)
-    local shortName = ''
-    if length == data:len()-11 and dataType == 8 then
-      shortName = data:sub(12,-2)
+    local name = ''
+    local isNameData = dataType == 8 or dataType == 9
+    if length == data:len()-11 and isNameData then
+      name = data:sub(12,-2)
     end
     local rssi = string.format("%-4d", data:byte(-1)-255)
     local id = data:sub(3,8):reverse()
@@ -35,7 +36,7 @@ local function scanBluetooth()
       mapping[id] = #lines + 1
     end
 
-    lines[mapping[id]] = rssi .. ' ' .. encoder.toHex(id) .. ' ' .. shortName
+    lines[mapping[id]] = rssi .. ' ' .. encoder.toHex(id) .. ' ' .. name
     if display then scrollable:display() end
   end
 
