@@ -3,11 +3,13 @@ local registerButtons = registerButtons
 local setmetatable = setmetatable
 local ipairs = ipairs
 local tmr = tmr
+local bthci = bthci
 
 local Package = {
   selected=1,
   screenSaverTimeout=5000,
   screenSaver=require('cube'),
+  advertiseBluetooth=true,
 }
 setfenv(1,Package)
 
@@ -31,29 +33,37 @@ function Package:setup()
     self.screenSaver:start()
     self.screenSaverRunning = true
   end)
+  if self.advertiseBluetooth then
+    bthci.adv.enable(1)
+  end
   self.screenSaverTimer:start()
   self:display()
 end
 
 function Package:buttonPress(name)
 
+  self.screenSaverTimer:stop()
   if self.screenSaver ~= nil then
     self.screenSaver:stop()
-    self.screenSaverTimer:stop()
   end
 
   local selected = self.selected
   local items = self.items
 
   if name == 'center' and not self.screenSaverRunning then
-    self.screenSaverTimer:unregister()
-    return self.items[selected].callback()
+    local function doCallback()
+      return self.items[selected].callback()
+    end
+    if self.advertiseBluetooth then
+      return bthci.adv.enable(0, doCallback)
+    end
+    return doCallback()
   end
   if name == 'up' then
-    selected = selected + 1
+    selected = selected - 1
   end
   if name == 'down' then
-    selected = selected - 1
+    selected = selected + 1
   end
   if selected > #items then
     selected = 1

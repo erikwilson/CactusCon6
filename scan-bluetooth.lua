@@ -2,7 +2,7 @@ local Scrollable = require('scrollable')
 
 local function scanBluetooth()
   local lines = {
-    'DATA',
+    'RSSI Address      Short Name',
     '-------------------------------------------------------------------------------------',
   }
   local mapping = {}
@@ -11,18 +11,13 @@ local function scanBluetooth()
   local doScan = nil
   local scrollable = Scrollable:new({lines=lines, callback=function()
     finished = true
-    require('main-menu')()
+    bthci.scan.enable(0, require('main-menu'))
   end})
-
-
-  -- 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7
-  -- 0300fe0425a4ae30121108436163747573436f6e362e6261646765d7
 
   local function showScan(data)
     if data == nil then return end
 
     if finished then
-      bthci.scan.enable(0)
       return
     end
 
@@ -31,18 +26,16 @@ local function scanBluetooth()
     local length = data:byte(10)
     local dataType = data:byte(11)
     local shortName = ''
-    print(length,dataType)
-    if length == data:len()-10 and type == 8 then
-      shortName = data:sub(12)
+    if length == data:len()-11 and dataType == 8 then
+      shortName = data:sub(12,-2)
     end
-
+    local rssi = string.format("%-4d", data:byte(-1)-255)
     local id = data:sub(3,8):reverse()
     if mapping[id] == nil then
       mapping[id] = #lines + 1
     end
 
-    lines[mapping[id]] = encoder.toHex(id) .. ' ' .. shortName
-
+    lines[mapping[id]] = rssi .. ' ' .. encoder.toHex(id) .. ' ' .. shortName
     if display then scrollable:display() end
   end
 
@@ -51,7 +44,7 @@ local function scanBluetooth()
   end
 
   registerButtons()
-  bthci.scan.setparams({mode=1,interval=40,window=20})
+  -- bthci.scan.setparams({mode=1,interval=40,window=20})
   bthci.scan.enable(1)
   disp:clearBuffer()
   disp:drawStr(0, 62, 'BlueTooth scanning...')
