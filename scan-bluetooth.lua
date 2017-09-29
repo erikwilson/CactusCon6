@@ -21,7 +21,7 @@ local function scanBluetooth()
       return
     end
 
-    print("ADV: "..encoder.toHex(data))
+    print(encoder.toHex(data))
 
     local length = data:byte(10)
     local dataType = data:byte(11)
@@ -45,10 +45,9 @@ local function scanBluetooth()
   end
 
   registerButtons()
-  -- bthci.scan.setparams({mode=1,interval=40,window=20})
   bthci.scan.enable(1)
   disp:clearBuffer()
-  disp:drawStr(0, 62, 'BlueTooth scanning...')
+  disp:drawStr(0, 31, 'BlueTooth scanning...')
   disp:sendBuffer()
   if not pcall(doScan) then
     tmr.create():alarm(1000, tmr.ALARM_SINGLE, scanBluetooth)

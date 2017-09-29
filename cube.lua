@@ -1,6 +1,6 @@
 
-local timeDelta = 100
-local stretch = 10
+local timeDelta = 150
+local stretch = 8
 local sZ = 1000
 local scale = 14
 local centerX = 64
@@ -157,9 +157,7 @@ local function cubeloop()
   disp:drawRBox(21,2,87,11,1)
   disp:drawLine(23,14,105,14)
   disp:setDrawColor(2)
-  disp:setFontDirection(0)
   disp:drawStr(23,11, 'CactusCon 2017')
-  disp:setFontRefHeightText(20)
   disp:setDrawColor(1)
   disp:drawStr(61,44, '6')
 

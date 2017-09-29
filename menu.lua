@@ -10,6 +10,12 @@ local Package = {
   screenSaverTimeout=5000,
   screenSaver=require('cube'),
   advertiseBluetooth=true,
+  renderCallback=nil,
+  offsetX=0,
+  offsetY=0,
+  lineHeight=10,
+  selectOffset=10,
+  selectChar='>',
 }
 setfenv(1,Package)
 
@@ -81,11 +87,12 @@ end
 
 function Package:display()
   disp:clearBuffer()
+  if self.renderCallback ~= nil then self.renderCallback() end
   for i, item in ipairs(self.items) do
     if self.selected == i then
-      disp:drawStr(10,10*i,'>')
+      disp:drawStr(self.offsetX,self.offsetY+self.lineHeight*i,self.selectChar)
     end
-    disp:drawStr(20,10*i,item.name)
+    disp:drawStr(self.offsetX+self.selectOffset,self.offsetY+self.lineHeight*i,item.name)
   end
   disp:sendBuffer()
 end
