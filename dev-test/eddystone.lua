@@ -1,3 +1,5 @@
+-- fixme https://github.com/sandeepmistry/arduino-BLEPeripheral/blob/master/src/EddystoneBeacon.cpp
+
 local prefix = {
     "http://www.",
     "https://www.",
@@ -31,7 +33,7 @@ function endsWith(String,End)
    return End=='' or string.sub(String,-string.len(End))==End
 end
 
-local url = "https://octoblu.com/"
+local url = "https://url.org/"
 print("url len:",url:len())
 local data = {
     string.char(0x02),
@@ -96,7 +98,7 @@ print(encoder.toHex(table.concat(data)))
 print('index:', prefix_index, suffix_index, url_start, url_end)
 print()
 
-local name = 'https://octoblu.com/'
+local name = 'https://url.org/'
 local info = name
 data = {string.char(string.len(info)+1),string.char(8),info}
 --local adv = encoder.fromHex("f60032be32c20201040303d8fe1216d8fe00f2027265656c7961637469766507")
@@ -107,10 +109,10 @@ local adv = table.concat(data)
 print('enc:',string.len(adv),encoder.toHex(adv))
 
 bthci.reset(function(err)
-    bthci.adv.setparams({type=bthci.adv.NONCONN_UNDIR}, function(err) 
-        print(err or "bt params set!") 
-        bthci.adv.setdata(adv, function(err) 
-            print(err or "bt data set!") 
+    bthci.adv.setparams({type=bthci.adv.NONCONN_UNDIR}, function(err)
+        print(err or "bt params set!")
+        bthci.adv.setdata(adv, function(err)
+            print(err or "bt data set!")
             bthci.adv.enable(1, function(err) print(err or "advertising!") end)
         end)
     end)

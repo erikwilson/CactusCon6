@@ -1,3 +1,4 @@
+-- converted from https://github.com/tobozo/Rotatey_Cube
 
 local timeDelta = 150
 local stretch = 8

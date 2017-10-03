@@ -1,3 +1,5 @@
+-- simplified from https://gist.github.com/davsebamse/1993081
+
 do
 	Life = {}
 	local mt = { __index = Life }
