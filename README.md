@@ -1,7 +1,7 @@
 
 # Setup
 
-For links to serial drivers and ESPlorer please visit:
+For links to serial drivers, esptool, and ESPlorer please visit:
 https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 
 These examples use /dev/cu.SLAB_USBtoUART as the serial port to NodeMCU, please change to the appropriate port on your system.
