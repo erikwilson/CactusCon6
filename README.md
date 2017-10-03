@@ -34,7 +34,7 @@ esptool --port /dev/cu.SLAB_USBtoUART --baud 921600 --before default_reset --aft
 
 ## Upload your Lua code
 
-Use ESPlorer to upload your Lua code.
+ESPlorer is the easiest way to upload your Lua code. Fixes and pull requests for './setup-broken' welcome.
 
 ## Saving a pre-built image from uploaded code
 
