@@ -2,7 +2,7 @@
 # Setup
 
 For links to serial drivers and ESPlorer please visit:
-`https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX`
+https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 
 These examples use /dev/cu.SLAB_USBtoUART as the serial port to NodeMCU, please change to the appropriate port on your system.
 
@@ -24,7 +24,7 @@ make -j4
 exit
 ```
 
-Also see `http://nodemcu.readthedocs.io/en/dev-esp32/en/build/`
+Also see http://nodemcu.readthedocs.io/en/dev-esp32/en/build/
 
 ## Flashing newly built image
 
