@@ -6,7 +6,13 @@ https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 
 These examples use /dev/cu.SLAB_USBtoUART as the serial port to NodeMCU, please change to the appropriate port on your system.
 
-# Building NodeMCU dev-esp32
+# Flashing the pre-built image
+
+```
+esptool --port /dev/cu.SLAB_USBtoUART --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0x0 ./firmware/cactuscon6.bin
+```
+
+# Building the NodeMCU dev-esp32 firmware
 
 Building NodeMCU's dev-esp32 branch is only necessary if you want to enable extra modules which are not available with the pre-built binaries under ./firmware.
 ```
@@ -40,10 +46,4 @@ ESPlorer is the easiest way to upload your Lua code. Fixes and pull requests for
 
 ```
 esptool --port /dev/cu.SLAB_USBtoUART --baud 921600 read_flash 0x0000 4194304 cactuscon6.bin
-```
-
-# Flashing the pre-built image
-
-```
-esptool --port /dev/cu.SLAB_USBtoUART --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0x0 ./firmware/cactuscon6.bin
 ```
