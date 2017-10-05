@@ -3,6 +3,8 @@
 
 Thanks to Tim Hatch for the PCB design, see https://github.com/thatch/cactuscon-badge-2017.
 
+Double check that the VCC and GND of your SSD1306 OLED display match the VCC and GND of the PCB. Unfortunately CactusCon received a shipment of OLEDs where the ordering of GND and VCC are reversed, requiring that those pins be bent or cut and then jumped to their appropriate position on the breakout or header beneath.
+
 # Setup
 
 For links to serial drivers, esptool, and ESPlorer please visit:
