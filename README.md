@@ -1,10 +1,14 @@
 
+# Hardware
+
+Thanks to Tim Hatch for the PCB design, see https://github.com/thatch/cactuscon-badge-2017.
+
 # Setup
 
 For links to serial drivers, esptool, and ESPlorer please visit:
 https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 
-These examples use /dev/cu.SLAB_USBtoUART as the serial port to NodeMCU, please change to the appropriate port on your system.
+These examples use /dev/cu.SLAB_USBtoUART as the serial port to NodeMCU, please change to the appropriate port on your system. Pre-built images in ./firmware are setup to use a baud rate of 921600.
 
 # Flashing the pre-built image
 
